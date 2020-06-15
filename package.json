@@ -32,7 +32,8 @@
     "build:watch": "tsc -w -p tsconfig.release.json",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "start": "ts-node src/main"
   },
   "author": "goooseman",
   "license": "ISC",
@@ -40,6 +41,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "socket.io": "^2.3.0",
+    "ts-node": "^8.10.2",
     "tslib": "~2.0.0"
   }
 }
