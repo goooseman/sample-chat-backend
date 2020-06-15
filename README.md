@@ -1,5 +1,7 @@
 # Sample Chat Backend
 
+> Publicly availible at [https://sample-chat.api.goooseman.ru/](https://sample-chat.api.goooseman.ru/)
+
 ### Quick start
 
 - `npm start` to run the project in development mode
