@@ -1,7 +1,7 @@
 {
-  "name": "node-typescript-boilerplate",
+  "name": "sample-chat-backend",
   "version": "0.0.0",
-  "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
+  "description": "A sample real-time chat built on Express and Socket.io.",
   "engines": {
     "node": ">= 12.13 <13"
   },
@@ -22,6 +22,10 @@
     "tsutils": "~3.17.0",
     "typescript": "~3.9.4"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/goooseman/sample-chat-backend.git"
+  },
   "scripts": {
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
@@ -30,8 +34,8 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
-  "author": "Jakub Synowiec <github@jakubsynowiec.info>",
-  "license": "Apache-2.0",
+  "author": "goooseman",
+  "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
