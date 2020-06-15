@@ -8,14 +8,39 @@ export enum ChatEvent {
   LIST_MESSAGES = 'listMessages'
 };
 
-interface ChatMessage {
+type SocketDefaultResult = "ok";
+type SocketDefaultError = string;
+type SocketResponse<
+  Res = SocketDefaultResult,
+  Err = SocketDefaultError
+> = {
+  res?: Res;
+  err?: Err;
+};
+
+type SocketCallback<
+  Res = SocketDefaultResult,
+  Err = SocketDefaultError
+> = (res: SocketResponse<Res, Err>) => void;
+
+
+interface ChatMessageIncoming {
   id: string;
   userId: string;
   text: string;
   username: string;
-  createdAt: string;
-  status: "none" | "receivedByServer";
 }
+
+interface ChatMessage extends ChatMessageIncoming {
+  createdAt: Date;
+  status: "receivedByServer";
+}
+
+interface ListMessagesResponse {
+  items: ChatMessage[];
+}
+
+const chatMessages: ChatMessage[] = [];
 
 export class ChatServer {
   public static readonly PORT: number = 8090;
@@ -46,9 +71,24 @@ export class ChatServer {
     this.io.on("connect", (socket: socketIo.Socket) => {
       console.log('Connected client on port %s.', this.port);
 
-      socket.on(ChatEvent.MESSAGE, (m: ChatMessage) => {
+      socket.on(ChatEvent.MESSAGE, (m: ChatMessageIncoming) => {
         console.log('[server](message): %s', JSON.stringify(m));
-        this.io.emit('message', m);
+        const savedMessage: ChatMessage = {
+          ...m,
+          createdAt: new Date(),
+          status: "receivedByServer"
+        }
+        chatMessages.push(savedMessage);
+        this.io.emit('message', savedMessage);
+      });
+
+      socket.on(ChatEvent.LIST_MESSAGES, (cb: SocketCallback<ListMessagesResponse>) => {
+        console.log('[server](listMessages)');
+        cb({
+          res: {
+            items: chatMessages.reverse()
+          }
+        })
       });
 
       socket.on("disconnected", () => {
