@@ -86,7 +86,7 @@ export class ChatServer {
         console.log('[server](listMessages)');
         cb({
           res: {
-            items: chatMessages.reverse()
+            items: chatMessages.slice().reverse()
           }
         })
       });
