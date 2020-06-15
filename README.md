@@ -3,7 +3,7 @@
 ### Quick start
 
 - `npm start` to run the project in development mode
-- `npm run build && node dist/src/main` to run the project in production mode (or just use a [pre-built Docker image](https://github.com/goooseman/sample-chat-backend/packages?package_type=Docker))
+- `npm run build && node dist/src/main` to run the project in production mode (or just use a [pre-built Docker image](https://hub.docker.com/repository/docker/goooseman/sample-chat-backend))
 
 ### API
 
